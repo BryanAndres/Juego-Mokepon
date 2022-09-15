@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/js/script.js"></script>
+</head>
+
+<body>
+    <h1>MOKEPON 💧🔥🌱💨⚡</h1>
+               
+    <section id="seleccionar-mascota">
+        <h2>Escoje tú mascota</h2>
+        
+        <label for="hipodoge">Hipodoge</label>
+        <input type="radio" name="mascota" id="hipodoge">
+
+        <label for="capipepo">Capipepo</label>
+        <input type="radio" name="mascota" id="capipepo">
+
+        <label for="ratigueya">Ratigueya</label>
+        <input type="radio" name="mascota" id="ratigueya">
+
+        <label for="nobaton">Nobaton</label>
+        <input type="radio" name="mascota" id="nobaton">
+        
+        <label for="langostelvis">Langostelvis</label>
+        <input type="radio" name="mascota" id="langostelvis">
+
+        <label for="pydos">Pydos</label>
+        <input type="radio" name="mascota" id="pydos">
+
+        <button id="boton-mascota">Seleccionar</button>
+
+        
+
+    </section>
+
+    <!-- Seccion donde apareceran todas las mascotas para ser elejidas -->
+    <section id="seleccionar-ataque">
+        <h2>Tu eleccion fue <span id="eleccion-jugador"></span></h2>
+        <h2>Tu rival escogio a <span id="eleccion-enemigo"></span></h2>
+
+        <h2>Escoje tu ataque</h2>
+        <p>Tu mascota <span id="mascota-jugador"></span> tiene <span id="vidas-jugador">3</span> vidas</p>
+        <p>La mascota rival <span id="mascota-enemigo"></span> tiene <span id="vidas-enemigo">3</span> vidas</p>
+        <div>
+            <button id="boton-fuego">Fuego 🔥</button>
+            <button id="boton-agua">Agua  💧</button>
+            <button id="boton-tierra">Tierra 🌱</button>
+            <button id="boton-aire">Aire  💨</button>
+            <button id="boton-trueno">Trueno ⚡</button>
+        </div>
+    </section>
+
+    <!-- Seccion donde se mostraran los mensajes de confirmacion y seleccion -->
+    <section id="mensajes">
+        <p></p>
+    </section>
+
+    <!-- Seccion para volver a jugar -->
+    <section id="seccion-reiniciar">
+        <button id="boton-reiniciar">Reiniciar</button>
+    </section>
+
+</body>
+
+</html>
