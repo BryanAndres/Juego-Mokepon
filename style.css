@@ -1,0 +1,24 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    /* Main Color */
+    --orange: hsl(30, 47%, 55%)
+    --negro: hsl(30, 46%, 5%)
+    /*Secondary Color*/
+    --rojo-oscuro: hsl(0, 46%, 35%)
+    --rojo-secundario: hsl(1, 46%, 65%)
+    /*Fonts title*/
+    --title: 'Nunito', sans-serif;
+    /*Fonts text*/
+    --text:  'PT Sans', sans-serif;
+}
+
+body{
+    background-color: hsl(30, 47%, 55%);
+}
+header > h1{
+    background-color:  hsl(1, 46%, 65%);
+}
