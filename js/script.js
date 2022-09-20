@@ -66,7 +66,7 @@ function seleccionarMascotaJugador(){
         spanEleccionJugador.innerHTML = ('Hipodoge')
         seleccionarMascotaEnemigo()
 
-        sectionSeleccionarAtaque.style.display = 'initial'
+        sectionSeleccionarAtaque.style.display = 'flex'
         sectionSeleccionarMascota.style.display = 'none'
     }
     else if(inputCapipepo.checked){
@@ -74,7 +74,7 @@ function seleccionarMascotaJugador(){
         spanEleccionJugador.innerHTML = ('Capipepo')
         seleccionarMascotaEnemigo()
 
-        sectionSeleccionarAtaque.style.display = 'initial'
+        sectionSeleccionarAtaque.style.display = 'flex'
         sectionSeleccionarMascota.style.display = 'none'
     }
     else if(inputRatigueya.checked){
@@ -82,7 +82,7 @@ function seleccionarMascotaJugador(){
         spanEleccionJugador.innerHTML = ('Ratigueya')
         seleccionarMascotaEnemigo()
 
-        sectionSeleccionarAtaque.style.display = 'initial'
+        sectionSeleccionarAtaque.style.display = 'flex'
         sectionSeleccionarMascota.style.display = 'none'
     }
     else if(inputNobaton.checked){
@@ -90,7 +90,7 @@ function seleccionarMascotaJugador(){
         spanEleccionJugador.innerHTML = ('Nobaton')
         seleccionarMascotaEnemigo()
 
-        sectionSeleccionarAtaque.style.display = 'initial'
+        sectionSeleccionarAtaque.style.display = 'flex'
         sectionSeleccionarMascota.style.display = 'none'
     }
     else if(inputLangostelvis.checked){
@@ -98,7 +98,7 @@ function seleccionarMascotaJugador(){
         spanEleccionJugador.innerHTML = ('Langostelvis')
         seleccionarMascotaEnemigo()
 
-        sectionSeleccionarAtaque.style.display = 'initial'
+        sectionSeleccionarAtaque.style.display = 'flex'
         sectionSeleccionarMascota.style.display = 'none'
     }
     else if(inputPydos.checked){
@@ -106,7 +106,7 @@ function seleccionarMascotaJugador(){
         spanEleccionJugador.innerHTML = ('Pydos')
         seleccionarMascotaEnemigo()
 
-        sectionSeleccionarAtaque.style.display = 'initial'
+        sectionSeleccionarAtaque.style.display = 'flex'
         sectionSeleccionarMascota.style.display = 'none'
     }
     else{
@@ -154,19 +154,27 @@ function combate(){
 }
 
 function crearMensaje(resultado){
-    let seccionMensajes = document.getElementById('mensajes')
-    let parrafo = document.createElement('p')
+    let seccionMensajes = document.getElementById('resultado')
+    let ataquesDelJugador = document.getElementById('ataques-del-jugador')
+    let ataquesDelEnemigo = document.getElementById('ataques-del-enemigo')
 
-    parrafo.innerHTML = 'Tu mascota ataco con ' + ataqueJugador + ' y la mascota del enemigo ataco con ' +  ataqueEnemigo + ' '+', Tu -- '+ resultado
-    seccionMensajes.appendChild(parrafo) 
+    let nuevoAtaqueJugador = document.createElement('p')
+    let nuevoAtaqueEnemigo = document.createElement('p')
+    let notificacion = document.createElement('p')
+
+    seccionMensajes.innerHTML = resultado
+    nuevoAtaqueJugador.innerHTML = ataqueJugador
+    nuevoAtaqueEnemigo.innerHTML = ataqueEnemigo
+    
+    seccionMensajes.appendChild(notificacion)
+    ataquesDelJugador.appendChild(nuevoAtaqueJugador) 
+    ataquesDelEnemigo.appendChild(nuevoAtaqueEnemigo)  
 }
 
 function crearMensajeResultado(resultadoFinal){
-    let seccionMensajes = document.getElementById('mensajes')
-    let parrafo = document.createElement('p')
+    let seccionMensajes = document.getElementById('resultado')
     
-    parrafo.innerHTML = resultadoFinal
-    seccionMensajes.appendChild(parrafo) 
+    seccionMensajes.innerHTML = resultadoFinal
 
     let btnFuego = document.getElementById('boton-fuego')
     btnFuego.disabled = true

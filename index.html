@@ -20,53 +20,53 @@
     <section class="seleccion-mascota" id="seleccionar-mascota">
         <h2>Escoje tú mascota</h2>
         <article class="seleccion-mokepon">
+            <input  type="radio" name="mascota" id="hipodoge">
             <label class="seleccion-mokepon__label" for="hipodoge">
                 <figure>
                     <img src="./img/AurelionSol_11.jpg" alt="">
                     <figcaption>Hipodoge</figcaption>
                 </figure>
             </label>
-            <input  type="radio" name="mascota" id="hipodoge">
-
+            
+            <input  type="radio" name="mascota" id="capipepo">
             <label class="seleccion-mokepon__label" for="capipepo">
                 <figure>
                     <img src="./img/Rammus_6.jpg" alt="">
                     <figcaption>Capipepo</figcaption>
                 </figure>
             </label>
-            <input  type="radio" name="mascota" id="capipepo">
-
+            
+            <input  type="radio" name="mascota" id="ratigueya">
             <label class="seleccion-mokepon__label" for="ratigueya">
                 <figure>
                     <img src="./img/Twitch_3.jpg" alt="">
                     <figcaption>Ratigueya</figcaption>
                 </figure>
             </label>
-            <input  type="radio" name="mascota" id="ratigueya">
-
+            
+            <input  type="radio" name="mascota" id="nobaton">
             <label class="seleccion-mokepon__label" for="nobaton">
                 <figure>
                     <img src="./img/Brand_8.jpg" alt="">
                     <figcaption>Nobaton</figcaption>
                 </figure>
             </label>
-            <input  type="radio" name="mascota" id="nobaton">
             
+            <input  type="radio" name="mascota" id="langostelvis">
             <label class="seleccion-mokepon__label" for="langostelvis">
                 <figure>
                     <img src="./img/Skarner_2.jpg" alt="">
                     <figcaption>Langostelvis</figcaption>
                 </figure>
             </label>
-            <input  type="radio" name="mascota" id="langostelvis">
             
+            <input  type="radio" name="mascota" id="pydos">
             <label class="seleccion-mokepon__label" for="pydos">
                 <figure>
                     <img class="img__pydos" src="./img/Fizz_1.jpg" alt="">
                     <figcaption>Pydos</figcaption>
                 </figure>
             </label>
-            <input  type="radio" name="mascota" id="pydos">
         </article>
 
         <button id="boton-mascota">Seleccionar</button>
@@ -77,31 +77,46 @@
 
     <!-- Seccion donde apareceran todas las mascotas para ser elejidas -->
     <section id="seleccionar-ataque">
-        <h2>Tu eleccion fue <span id="eleccion-jugador"></span></h2>
-        <h2>Tu rival escogio a <span id="eleccion-enemigo"></span></h2>
+        
+        <div class="nombres-mascota">
+            <h2 class="nombres-mascota__jugador"><span id="eleccion-jugador"></span></h2>
+            <h2 class="vs"> VS </h2>
+            <h2 class="nombres-mascota__enemigo"><span id="eleccion-enemigo"></span></h2>
+        </div>
+        <h2 class="tipo-ataque">Elige tu ataque</h2>
+        <div class="botones-ataque">
+            <button class="boton" id="boton-fuego">Fuego 🔥</button>
+            <button class="boton" id="boton-agua">Agua  💧</button>
+            <button class="boton" id="boton-tierra">Tierra 🌱</button>
+            <button class="boton" id="boton-aire">Aire  💨</button>
+            <button class="boton" id="boton-trueno">Trueno ⚡</button>
+        </div>
 
-        <h2>Escoje tu ataque</h2>
-        <p>Tu mascota <span id="mascota-jugador"></span> tiene <span id="vidas-jugador">3</span> vidas</p>
-        <p>La mascota rival <span id="mascota-enemigo"></span> tiene <span id="vidas-enemigo">3</span> vidas</p>
-        <div>
-            <button id="boton-fuego">Fuego 🔥</button>
-            <button id="boton-agua">Agua  💧</button>
-            <button id="boton-tierra">Tierra 🌱</button>
-            <button id="boton-aire">Aire  💨</button>
-            <button id="boton-trueno">Trueno ⚡</button>
+        <div id="mensajes">
+            <p id="resultado">Comienza la batalla!!</p>
+            <section id="seccion-reiniciar">
+                <button id="boton-reiniciar">Reiniciar</button>
+            </section>
+        </div>
+        
+
+        <div class="mensajes">
+            <div class="mensajes-juego">
+                <div>
+                    <p id="vidas-jugador">3</p>
+                    <p id="mascota-jugador"></p>
+                </div>
+                <div id="ataques-del-jugador"></div>
+            </div>
+            <div class="mensajes-juego">
+                <div>
+                    <p id="vidas-enemigo">3</p>
+                    <p id="mascota-enemigo"></p>
+                </div>
+                <div id="ataques-del-enemigo"></div>
+            </div>
         </div>
     </section>
-
-    <!-- Seccion donde se mostraran los mensajes de confirmacion y seleccion -->
-    <section id="mensajes">
-        <p></p>
-    </section>
-
-    <!-- Seccion para volver a jugar -->
-    <section id="seccion-reiniciar">
-        <button id="boton-reiniciar">Reiniciar</button>
-    </section>
-
 </body>
 
 </html>
