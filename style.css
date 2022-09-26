@@ -167,6 +167,11 @@ input:checked + label {
 }
 .mensajes-juego{
     display: flex;
+    padding: 15px;
+}
+.mensajes-juego > div{
+    background-color: var(--naranja);
+    border-radius: 15px;
 }
 #mensajes{
     min-width: 300px;
@@ -199,6 +204,8 @@ input:checked + label {
     width: 300px;
     text-align: center;
     font-size: var(--size-h4);
+    background-color: var(--naranja-suave);
+    border-radius: 10px;
     margin-bottom: 50px;
 }
 .mensajes-juego{
