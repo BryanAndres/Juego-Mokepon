@@ -8,12 +8,7 @@ const btnAire = document.getElementById('boton-aire')
 const btnTrueno = document.getElementById('boton-trueno')
 const btnReiniciar = document.getElementById('boton-reiniciar')
 
-const inputHipodogue = document.getElementById('hipodoge')
-const inputCapipepo  = document.getElementById('capipepo')
-const inputRatigueya = document.getElementById('ratigueya')
-const inputNobaton   = document.getElementById('nobaton')
-const inputLangostelvis = document.getElementById('langostelvis')
-const inputPydos = document.getElementById('pydos')
+
 const spanEleccionJugador = document.getElementById('eleccion-jugador')
 const spanMascotaJugador = document.getElementById('mascota-jugador')
 const sectionSeleccionarMascota = document.getElementById('seleccionar-mascota')
@@ -27,38 +22,126 @@ const ataquesDelEnemigo = document.getElementById('ataques-del-enemigo')
 
 const spanEleccionEnemigo = document.getElementById('eleccion-enemigo')
 const spanMascotaEnemigo = document.getElementById('mascota-enemigo')
+const contenedorTarjetas = document.getElementById('contenedor-tarjetas')
 
+let mokepones = []
 let ataqueJugador = ""
 let ataqueEnemigo = ""
+let opcionDeMokepones
+let inputHipodogue 
+let inputCapipepo  
+let inputRatigueya 
+let inputNobaton   
+let inputLangostelvis 
+let inputPydos 
 let vidasJugador = 3
 let vidasEnemigo = 3
 
+class Mokepon {
+    constructor(nombre, imagen, vida) {
+        this.nombre = nombre
+        this.imagen = imagen
+        this.vida = vida
+        this.ataques = []
+    }
+}
+
+// 6 objetos de nuestra clase
+let hipodogue = new Mokepon('Hipodogue','./img/AurelionSol_11.jpg', 5)
+let capipepo = new Mokepon('Capipepo','./img/Rammus_6.jpg', 5)
+let ratigueya = new Mokepon('Ratigueya','./img/Twitch_3.jpg', 5)
+let nobaton = new Mokepon('Nobaton','./img/Brand_8.jpg', '5')
+let langostelvis = new Mokepon('Langostelvis','./img/Skarner_2.jpg', 5)
+let pydos = new Mokepon('Pydos','./img/Fizz_1.jpg', 5)
+
+
+hipodogue.ataques.push(
+    {nombre: '⚡', id : 'boton-trueno' },
+    {nombre: '⚡', id : 'boton-trueno' },
+    {nombre: '⚡', id : 'boton-trueno' },
+    {nombre: '💧', id : 'boton-agua' },
+    {nombre: '🔥', id : 'boton-fuego' },
+)
+
+ratigueya.ataques.push(
+    {nombre: '🌱', id : 'boton-tierra' },
+    {nombre: '🌱', id : 'boton-tierra' },
+    {nombre: '💧', id : 'boton-agua' },
+    {nombre: '🔥', id : 'boton-fuego' },
+    {nombre: '🔥', id : 'boton-fuego' },
+)
+
+capipepo.ataques.push(
+    {nombre: '🌱', id : 'boton-tierra' },
+    {nombre: '🌱', id : 'boton-tierra' },
+    {nombre: '🌱', id : 'boton-tierra' },
+    {nombre: '🔥', id : 'boton-fuego' },
+    {nombre: '⚡', id : 'boton-trueno' },
+)
+
+nobaton.ataques.push(
+    {nombre: '🔥', id : 'boton-fuego' },
+    {nombre: '🔥', id : 'boton-fuego' },
+    {nombre: '🔥', id : 'boton-fuego' },
+    {nombre: '🌱', id : 'boton-tierra' },
+    {nombre: '💨', id : 'boton-aire' },
+)
+
+langostelvis.ataques.push(
+    {nombre: '💨', id : 'boton-aire' },
+    {nombre: '💨', id : 'boton-aire' },
+    {nombre: '💨', id : 'boton-aire' },
+    {nombre: '💧', id : 'boton-agua' },
+    {nombre: '🌱', id : 'boton-tierra' },
+)
+
+pydos.ataques.push(
+    {nombre: '💧', id : 'boton-agua' },
+    {nombre: '💧', id : 'boton-agua' },
+    {nombre: '💧', id : 'boton-agua' },
+    {nombre: '💨', id : 'boton-aire' },
+    {nombre: '⚡', id : 'boton-trueno' }
+)
+
+mokepones.push(hipodogue,capipepo,ratigueya,nobaton,langostelvis,pydos)
+
 window.addEventListener('load', iniciarJuego)
-
 function iniciarJuego(){
-
     // let seccionSeleccionarAtaque = document.getElementById('seleccionar-ataque')
     seccionSeleccionarAtaque.style.display = 'none'
 
-    // let seccionReiniciarJuego = document.getElementById('seccion-reiniciar')
+    mokepones.forEach((mokepon)=> {
+        opcionDeMokepones = 
+        `<input type="radio" name="mascota" id=${mokepon.nombre} />
+        <label class="seleccion-mokepon__label" for=${mokepon.nombre}>
+            <figure>
+                <img src="${mokepon.imagen}" alt="${mokepon.nombre}">
+                <figcaption>${mokepon.nombre}</figcaption>
+            </figure>
+        </label>
+        `
+        contenedorTarjetas.innerHTML += opcionDeMokepones
+
+        inputHipodogue = document.getElementById('Hipodogue')
+        inputCapipepo  = document.getElementById('Capipepo')
+        inputRatigueya = document.getElementById('Ratigueya')
+        inputNobaton   = document.getElementById('Nobaton')
+        inputLangostelvis = document.getElementById('Langostelvis')
+        inputPydos = document.getElementById('Pydos')
+    })
+
     seccionReiniciarJuego.style.display = 'none'
 
-    // let botonMascotaJugador = document.getElementById('boton-mascota')
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
 
-    // let btnFuego = document.getElementById('boton-fuego')
     btnFuego.addEventListener('click',ataqueFuego)
 
-    // let btnAgua = document.getElementById('boton-agua')
     btnAgua.addEventListener('click', ataqueAgua)
 
-    // let btnTierra  = document.getElementById('boton-tierra')
     btnTierra.addEventListener('click', ataqueTierra)
 
-    // let btnAire = document.getElementById('boton-aire')
     btnAire.addEventListener('click',ataqueAire)
 
-    // let btnTrueno = document.getElementById('boton-trueno')
     btnTrueno.addEventListener('click', ataqueTrueno)
 
     // let btnReiniciar = document.getElementById('boton-reiniciar')
