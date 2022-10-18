@@ -262,11 +262,7 @@ function mostrarAtaques(ataques){
     })
 
     botones = document.querySelectorAll('.BAtaque')
-    // btnFuego = document.getElementById('boton-fuego')
-    // btnAgua = document.getElementById('boton-agua')
-    // btnTierra  = document.getElementById('boton-tierra')
-    // btnAire = document.getElementById('boton-aire')
-    // btnTrueno = document.getElementById('boton-trueno')
+
 }
 
 function secuenciaAtaque(){
