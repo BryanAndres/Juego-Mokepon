@@ -51,7 +51,7 @@ class Mokepon {
     }
 }
 
-// 6 objetos de nuestra clase
+// 6 mokepones actualmente
 let hipodogue = new Mokepon('Hipodogue','./img/AurelionSol_11.jpg', 5)
 let capipepo = new Mokepon('Capipepo','./img/Rammus_6.jpg', 5)
 let ratigueya = new Mokepon('Ratigueya','./img/Twitch_3.jpg', 5)
@@ -107,12 +107,11 @@ pydos.ataques.push(
     {nombre: '💨', id : 'boton-aire' },
     {nombre: '⚡', id : 'boton-trueno' }
 )
-
+//Agrego mis mokepones al arreglos de mokepones
 mokepones.push(hipodogue,capipepo,ratigueya,nobaton,langostelvis,pydos)
 
 window.addEventListener('load', iniciarJuego)
 function iniciarJuego(){
-    // let seccionSeleccionarAtaque = document.getElementById('seleccionar-ataque')
     seccionSeleccionarAtaque.style.display = 'none'
 
     mokepones.forEach((mokepon)=> {
@@ -262,7 +261,6 @@ function mostrarAtaques(ataques){
     })
 
     botones = document.querySelectorAll('.BAtaque')
-
 }
 
 function secuenciaAtaque(){
@@ -277,9 +275,7 @@ function seleccionarMascotaEnemigo(){
     spanEleccionEnemigo.innerHTML = mokepones[mascotaAleatorio].nombre
 }
 
-//------------------------------------
-    
-//------------------------------------
+
 
 function ataqueFuego(){
     ataqueJugador = 'Fuego 🔥'
