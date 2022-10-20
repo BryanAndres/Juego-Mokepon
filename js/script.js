@@ -2,7 +2,8 @@ const seccionSeleccionarAtaque = document.getElementById('seleccionar-ataque')
 const seccionReiniciarJuego = document.getElementById('seccion-reiniciar')
 const botonMascotaJugador = document.getElementById('boton-mascota')
 const btnReiniciar = document.getElementById('boton-reiniciar')
-
+const sectionVerMapa = document.getElementById('ver-mapa')
+const mapa = document.getElementById('mapa') //canvas
 
 const spanEleccionJugador = document.getElementById('eleccion-jugador')
 const spanMascotaJugador = document.getElementById('mascota-jugador')
@@ -46,6 +47,7 @@ let btnAire
 let btnTrueno 
 let vidasJugador = 3
 let vidasEnemigo = 3
+let lienzo = mapa.getContext("2d")
 
 class Mokepon {
     constructor(nombre, imagen, vida) {
@@ -53,6 +55,12 @@ class Mokepon {
         this.imagen = imagen
         this.vida = vida
         this.ataques = []
+        this.x = 20
+        this.y = 30
+        this.ancho = 80
+        this.alto = 80
+        this.mapaFoto = new Image()
+        this.mapaFoto.src = imagen
     }
 }
 
@@ -119,6 +127,7 @@ window.addEventListener('load', iniciarJuego)
 
 function iniciarJuego(){
     seccionSeleccionarAtaque.style.display = 'none'
+    sectionVerMapa.style.display = 'none'
 
     mokepones.forEach((mokepon)=> {
         opcionDeMokepones = 
@@ -156,7 +165,8 @@ function seleccionarMascotaJugador(){
 
         seleccionarMascotaEnemigo()
 
-        seccionSeleccionarAtaque.style.display = 'flex'
+        // seccionSeleccionarAtaque.style.display = 'flex'
+        sectionVerMapa.style.display = 'flex'
         sectionSeleccionarMascota.style.display = 'none'
     }
     else if(inputCapipepo.checked){
@@ -166,7 +176,8 @@ function seleccionarMascotaJugador(){
 
         seleccionarMascotaEnemigo()
 
-        seccionSeleccionarAtaque.style.display = 'flex'
+        // seccionSeleccionarAtaque.style.display = 'flex'
+        sectionVerMapa.style.display = 'flex'
         sectionSeleccionarMascota.style.display = 'none'
     }
     else if(inputRatigueya.checked){
@@ -176,8 +187,19 @@ function seleccionarMascotaJugador(){
 
         seleccionarMascotaEnemigo()
 
-        seccionSeleccionarAtaque.style.display = 'flex'
-        sectionSeleccionarMascota.style.display = 'none'
+       // seccionSeleccionarAtaque.style.display = 'flex'
+       sectionVerMapa.style.display = 'flex'
+       let imagenRatigueya = new Image()
+       imagenRatigueya.src = ratigueya.imagen
+       lienzo.drawImage(
+           imagenRatigueya,
+           20,
+           40,
+           100,
+           100,
+       )
+
+       sectionSeleccionarMascota.style.display = 'none'
     }
     else if(inputNobaton.checked){
         spanMascotaJugador.innerHTML = inputNobaton.id
@@ -186,7 +208,18 @@ function seleccionarMascotaJugador(){
 
         seleccionarMascotaEnemigo()
 
-        seccionSeleccionarAtaque.style.display = 'flex'
+        // seccionSeleccionarAtaque.style.display = 'flex'
+        sectionVerMapa.style.display = 'flex'
+        let imagenNobaton = new Image()
+        imagenNobaton.src = nobaton.imagen
+        lienzo.drawImage(
+           imagenNobaton,
+           20,
+           40,
+           100,
+           100,
+        )
+
         sectionSeleccionarMascota.style.display = 'none'
     }
     else if(inputLangostelvis.checked){
@@ -196,7 +229,18 @@ function seleccionarMascotaJugador(){
 
         seleccionarMascotaEnemigo()
 
-        seccionSeleccionarAtaque.style.display = 'flex'
+        // seccionSeleccionarAtaque.style.display = 'flex'
+        sectionVerMapa.style.display = 'flex'
+        let imagenLangostelvis = new Image()
+        imagenLangostelvis.src = langostelvis.imagen
+        lienzo.drawImage(
+           imagenLangostelvis,
+           20,
+           40,
+           100,
+           100,
+        )
+
         sectionSeleccionarMascota.style.display = 'none'
     }
     else if(inputPydos.checked){
@@ -206,7 +250,18 @@ function seleccionarMascotaJugador(){
 
         seleccionarMascotaEnemigo()
 
-        seccionSeleccionarAtaque.style.display = 'flex'
+        // seccionSeleccionarAtaque.style.display = 'flex'
+        sectionVerMapa.style.display = 'flex'
+        let imagenPydos = new Image()
+        imagenPydos.src = pydos.imagen
+        lienzo.drawImage(
+           imagenPydos,
+           20,
+           40,
+           100,
+           100,
+        )
+
         sectionSeleccionarMascota.style.display = 'none'
     }
     else{
@@ -216,6 +271,24 @@ function seleccionarMascotaJugador(){
     
     extraerAtaques(mascotaJugador) //capipepo
 }
+
+function moverCapipepo(){
+    capipepo.x = capipepo.x + 5
+    pintarPersonaje()
+}
+
+
+function pintarPersonaje(){
+    lienzo.clearRect(0,0, mapa.clientWidth, mapa.height)
+    lienzo.drawImage(
+        capipepo.mapaFoto,
+        capipepo.x,
+        capipepo.y,
+        capipepo.ancho,
+        capipepo.alto
+    )
+}
+
 
 function seleccionarMascotaEnemigo(){
     let mascotaAleatorio = aleatoriedad(0, mokepones.length-1)

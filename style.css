@@ -214,3 +214,14 @@ input:checked + label {
     gap: 10px;
     align-items: center;
 }
+
+#ver-mapa{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#mapa{
+    margin-top: 20px;
+    border: solid var(--naranja-fuerte);
+}
