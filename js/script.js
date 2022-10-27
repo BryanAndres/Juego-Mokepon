@@ -38,6 +38,7 @@ let inputNobaton
 let inputLangostelvis 
 let inputPydos 
 let mascotaJugador
+let mascotaJugadorObjeto
 let ataquesMokepon
 let ataquesMokeponEnemigo
 let btnFuego 
@@ -48,6 +49,9 @@ let btnTrueno
 let vidasJugador = 3
 let vidasEnemigo = 3
 let lienzo = mapa.getContext("2d")
+let intervalo
+let mapaBackground = new Image()
+mapaBackground.src= '../img/a.jpg'
 
 class Mokepon {
     constructor(nombre, imagen, vida) {
@@ -57,10 +61,12 @@ class Mokepon {
         this.ataques = []
         this.x = 20
         this.y = 30
-        this.ancho = 80
-        this.alto = 80
+        this.ancho = 40
+        this.alto = 30
         this.mapaFoto = new Image()
         this.mapaFoto.src = imagen
+        this.velocidadX = 0
+        this.velocidadY = 0
     }
 }
 
@@ -158,12 +164,14 @@ function iniciarJuego(){
 }
 
 function seleccionarMascotaJugador(){
+
     if(inputHipodogue.checked){
         spanMascotaJugador.innerHTML = inputHipodogue.id
         spanEleccionJugador.innerHTML = inputHipodogue.id
         mascotaJugador= inputHipodogue.id
 
         seleccionarMascotaEnemigo()
+        iniciarMapa()
 
         // seccionSeleccionarAtaque.style.display = 'flex'
         sectionVerMapa.style.display = 'flex'
@@ -175,6 +183,7 @@ function seleccionarMascotaJugador(){
         mascotaJugador= inputCapipepo.id
 
         seleccionarMascotaEnemigo()
+        iniciarMapa()
 
         // seccionSeleccionarAtaque.style.display = 'flex'
         sectionVerMapa.style.display = 'flex'
@@ -186,19 +195,8 @@ function seleccionarMascotaJugador(){
         mascotaJugador= inputRatigueya.id
 
         seleccionarMascotaEnemigo()
-
-       // seccionSeleccionarAtaque.style.display = 'flex'
-       sectionVerMapa.style.display = 'flex'
-       let imagenRatigueya = new Image()
-       imagenRatigueya.src = ratigueya.imagen
-       lienzo.drawImage(
-           imagenRatigueya,
-           20,
-           40,
-           100,
-           100,
-       )
-
+        iniciarMapa()
+        sectionVerMapa.style.display = 'flex'
        sectionSeleccionarMascota.style.display = 'none'
     }
     else if(inputNobaton.checked){
@@ -207,19 +205,9 @@ function seleccionarMascotaJugador(){
         mascotaJugador= inputNobaton.id
 
         seleccionarMascotaEnemigo()
+        iniciarMapa()
 
-        // seccionSeleccionarAtaque.style.display = 'flex'
         sectionVerMapa.style.display = 'flex'
-        let imagenNobaton = new Image()
-        imagenNobaton.src = nobaton.imagen
-        lienzo.drawImage(
-           imagenNobaton,
-           20,
-           40,
-           100,
-           100,
-        )
-
         sectionSeleccionarMascota.style.display = 'none'
     }
     else if(inputLangostelvis.checked){
@@ -228,18 +216,10 @@ function seleccionarMascotaJugador(){
         mascotaJugador = inputLangostelvis.id
 
         seleccionarMascotaEnemigo()
+        iniciarMapa()
 
         // seccionSeleccionarAtaque.style.display = 'flex'
         sectionVerMapa.style.display = 'flex'
-        let imagenLangostelvis = new Image()
-        imagenLangostelvis.src = langostelvis.imagen
-        lienzo.drawImage(
-           imagenLangostelvis,
-           20,
-           40,
-           100,
-           100,
-        )
 
         sectionSeleccionarMascota.style.display = 'none'
     }
@@ -249,46 +229,93 @@ function seleccionarMascotaJugador(){
         mascotaJugador = inputPydos.id
 
         seleccionarMascotaEnemigo()
+        iniciarMapa()
 
         // seccionSeleccionarAtaque.style.display = 'flex'
         sectionVerMapa.style.display = 'flex'
-        let imagenPydos = new Image()
-        imagenPydos.src = pydos.imagen
-        lienzo.drawImage(
-           imagenPydos,
-           20,
-           40,
-           100,
-           100,
-        )
-
         sectionSeleccionarMascota.style.display = 'none'
     }
     else{
         alert('No has seleccionado una mascota porfavor intenta otra vez')
     }
-    
-    
     extraerAtaques(mascotaJugador) //capipepo
 }
 
-function moverCapipepo(){
-    capipepo.x = capipepo.x + 5
-    pintarPersonaje()
-}
+function pintarCanvas(){
 
 
-function pintarPersonaje(){
+    mascotaJugadorObjeto.x = mascotaJugadorObjeto.x + mascotaJugadorObjeto.velocidadX
+    mascotaJugadorObjeto.y = mascotaJugadorObjeto.y + mascotaJugadorObjeto.velocidadY
     lienzo.clearRect(0,0, mapa.clientWidth, mapa.height)
     lienzo.drawImage(
-        capipepo.mapaFoto,
-        capipepo.x,
-        capipepo.y,
-        capipepo.ancho,
-        capipepo.alto
+        mapaBackground,
+        0,
+        0,
+        mapa.width,
+        mapa.height
+    )
+    lienzo.drawImage(
+        mascotaJugadorObjeto.mapaFoto,
+        mascotaJugadorObjeto.x,
+        mascotaJugadorObjeto.y,
+        mascotaJugadorObjeto.ancho,
+        mascotaJugadorObjeto.alto
     )
 }
 
+function moverDerecha(){
+    mascotaJugadorObjeto.velocidadX = 5
+}
+function moverIzquierda(){
+    mascotaJugadorObjeto.velocidadX = -5 
+}
+function moverAbajo(){
+    mascotaJugadorObjeto.velocidadY = 5
+}
+function moverArriba(){
+    mascotaJugadorObjeto.velocidadY= -5
+}
+
+function detener(){
+    mascotaJugadorObjeto.velocidadX = 0
+    mascotaJugadorObjeto.velocidadY = 0
+}
+
+function activacionTecla(event) {
+    switch (event.key) {
+        case 'ArrowUp':
+            moverArriba()
+            break
+        case 'ArrowDown':
+            moverAbajo()
+            break
+        case 'ArrowLeft':
+            moverIzquierda()
+            break
+        case 'ArrowRight':
+            moverDerecha()
+        default:
+            break;
+    }
+}
+
+function iniciarMapa() {
+    mapa.width = 500
+    mapa.height = 300
+
+    mascotaJugadorObjeto = obtenerObjetoMascota(mascotaJugador)
+    intervalo = setInterval(pintarCanvas, 50)
+    window.addEventListener('keydown', activacionTecla)
+    window.addEventListener('keyup', detener)
+}
+
+function obtenerObjetoMascota() {
+    for (let i = 0; i < mokepones.length; i++) {
+        if(mascotaJugador == mokepones[i].nombre){
+            return mokepones[i]
+        }
+    }
+}
 
 function seleccionarMascotaEnemigo(){
     let mascotaAleatorio = aleatoriedad(0, mokepones.length-1)
