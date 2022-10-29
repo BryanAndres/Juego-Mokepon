@@ -382,10 +382,10 @@ function revisarColision(enemigo) {
 
     detener()
     console.log("Se detecto una colision");
-
     sectionVerMapa.style.display = 'none'
+    mapa.style.display = 'none'
     seccionSeleccionarAtaque.style.display = 'flex'
-
+    
     seleccionarMascotaEnemigo(enemigo)
 }
 
