@@ -15,13 +15,11 @@
     <header>
         <h1>MOKEPON</h1>
     </header>
-               
-    <section class="seleccion-mascota" id="seleccionar-mascota">
+  
+    <section id="seleccionar-mascota" class="seleccion-mascota">
         <h2>Escoje tú mascota</h2>
-            
         <article id="contenedor-tarjetas" class="seleccion-mokepon">
         </article>
-
         <button id="boton-mascota">Seleccionar</button>
     </section>
 
@@ -34,19 +32,15 @@
         <button onmouseup="detener()"  onmousedown="moverDerecha()">Derecha</button>
     </section>
 
-    <!-- Seccion donde apareceran todas las mascotas para ser elejidas -->
-    <section id="seleccionar-ataque">
-        
+    <section id="seleccionar-ataque">       
         <div class="nombres-mascota">
             <h2 class="nombres-mascota__jugador"><span id="eleccion-jugador"></span></h2>
             <h2 class="vs"> VS </h2>
             <h2 class="nombres-mascota__enemigo"><span id="eleccion-enemigo"></span></h2>
         </div>
-
         <h2 class="tipo-ataque">Elige tu ataque</h2>
 
         <div id="contenedor-ataques" class="botones-ataque">
-            
         </div>
 
         <div id="mensajes">
@@ -55,6 +49,7 @@
                 <button id="boton-reiniciar">Reiniciar</button>
             </section>
         </div>
+
         <div class="mensajes">
             <div class="mensajes-juego">
                 <div>
@@ -71,6 +66,7 @@
                 <div id="ataques-del-enemigo"></div>
             </div>
         </div>
+
     </section>
     <script src="/js/script.js"></script>
 </body>
