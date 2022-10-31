@@ -25,6 +25,7 @@ const spanVidasEnemigo = document.getElementById('vidas-enemigo')
 const spanMascotaEnemigo = document.getElementById('mascota-enemigo')
 const ataquesDelEnemigo = document.getElementById('ataques-del-enemigo')
 
+let jugadorId = null
 let mokepones = []
 let botones = []
 let ataqueJugador = []
@@ -233,6 +234,22 @@ function iniciarJuego(){
     inputPydos = document.getElementById('Pydos')
 
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
+
+    unirseJuego()
+}
+
+function unirseJuego(){
+    fetch("http://localhost:8080/unirse")
+    .then(function (res) {
+        console.log(res)
+        if(res.ok){
+            res.text()
+                .then(function(respuesta){
+                    console.log(respuesta)
+                    jugadorId = respuesta
+                })
+        }
+    })
 }
 
 function seleccionarMascotaJugador(){
@@ -258,6 +275,19 @@ function seleccionarMascotaJugador(){
     else{
         alert('No has seleccionado una mascota porfavor intenta otra vez')
     }
+
+}
+
+function seleccionarMokepon(mascotaJugador) {
+    fetch(`http://localhost:8080/mokepon/${jugadorId}`,{
+        method : "post",
+        headers :{
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            mokepon: mascotaJugador
+        })
+    })
 }
 
 function representarNombre(nombreMascota) {
@@ -269,7 +299,8 @@ function representarNombre(nombreMascota) {
     sectionVerMapa.style.display = 'flex'
 
     iniciarMapa()
-    extraerAtaques(mascotaJugador) 
+    extraerAtaques(mascotaJugador)
+    seleccionarMokepon(mascotaJugador) 
 }
 
 function iniciarMapa() {
