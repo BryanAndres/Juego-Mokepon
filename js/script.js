@@ -30,6 +30,7 @@ let mokepones = []
 let botones = []
 let ataqueJugador = []
 let ataqueEnemigo = []
+let mokeponesEnemigos = []
 
 let indexAtaqueJugador
 let indexAtaqueEnemigo
@@ -107,8 +108,6 @@ let ratigueya = new Mokepon('Ratigueya','../img/ratigueya.jpg', 5, '../img/ratig
 let nobaton = new Mokepon('Nobaton','./img/Brand_8.jpg', 5, '../img/Brand_8.jpg')
 let langostelvis = new Mokepon('Langostelvis','./img/Skarner_2.jpg', 5, '../img/Skarner_2.jpg')
 let pydos = new Mokepon('Pydos','./img/Fizz_1.jpg', 5, '../img/Fizz_1.jpg')
-//Agrego mis mokepones al arreglos de mokepones
-mokepones.push(hipodogue,capipepo,ratigueya,nobaton,langostelvis,pydos)
 
 const HIPODOGUE_ATAQUES = [
     {nombre: '⚡', id : 'boton-trueno' },
@@ -161,18 +160,14 @@ const PYDOS_ATAQUES = [
 
 // Le creo los ataques a los mokepones
 hipodogue.ataques.push(...HIPODOGUE_ATAQUES)
-
 capipepo.ataques.push(...CAPIPEPO_ATAQUES)
-
 ratigueya.ataques.push(...RATIGUEYA_ATAQUES)
-
 nobaton.ataques.push(...NOBATON_ATAQUES)
-
 langostelvis.ataques.push(...LANGOSTELVIS_ATAQUES)
-
 pydos.ataques.push(...PYDOS_ATAQUES)
 
-
+//Agrego mis mokepones al arreglos de mokepones
+mokepones.push(hipodogue,capipepo,ratigueya,nobaton,langostelvis,pydos)
 
 function iniciarJuego(){
     seccionSeleccionarAtaque.style.display = 'none'
@@ -206,8 +201,7 @@ function iniciarJuego(){
 
 function unirseJuego(){
     fetch("http://localhost:8080/unirse")
-    .then(function (res) {
-        console.log(res)
+    .then((res) => {
         if(res.ok){
             res.text()
                 .then(function(respuesta){
@@ -271,25 +265,26 @@ function representarNombre(nombreMascota) {
 
 function iniciarMapa() {
     mascotaJugadorObjeto = obtenerObjetoMascota() 
-
+    console.log(mascotaJugadorObjeto, mascotaJugador);
     intervalo = setInterval(pintarCanvas, 50)
+
     window.addEventListener('keydown', activacionTecla)
+
     window.addEventListener('keyup', detener)
 }
 
 function obtenerObjetoMascota() {
     for (let i = 0; i < mokepones.length; i++) {
-        if(mascotaJugador == mokepones[i].nombre){
+        if(mascotaJugador === mokepones[i].nombre){
             return mokepones[i]
         }
     }
 }
 
-function pintarCanvas(){
+function pintarCanvas() {
     mascotaJugadorObjeto.x = mascotaJugadorObjeto.x + mascotaJugadorObjeto.velocidadX
     mascotaJugadorObjeto.y = mascotaJugadorObjeto.y + mascotaJugadorObjeto.velocidadY
-
-    lienzo.clearRect(0,0, mapa.clientWidth, mapa.height)
+    lienzo.clearRect(0, 0, mapa.width, mapa.height)
     lienzo.drawImage(
         mapaBackground,
         0,
@@ -297,14 +292,14 @@ function pintarCanvas(){
         mapa.width,
         mapa.height
     )
-
     mascotaJugadorObjeto.pintarMokepon()
 
-    enviarPosicion(mascotaJugadorObjeto.x,mascotaJugadorObjeto.y)
+    enviarPosicion(mascotaJugadorObjeto.x, mascotaJugadorObjeto.y)
 
-    if (mascotaJugadorObjeto.velocidadX !== 0 || mascotaJugadorObjeto.velocidadY !== 0) {
-        revisarColision(mokeponEnemigo)
-    }
+    mokeponesEnemigos.forEach(function (mokepon) {
+        mokepon.pintarMokepon()
+        revisarColision(mokepon)
+    })
 }
 
 function enviarPosicion(x,y) {
@@ -321,8 +316,9 @@ function enviarPosicion(x,y) {
     .then(function (res) {
         if (res.ok) {
             res.json()
-                .then(function({enemigos}){                    
-                    enemigos.forEach(function(enemigo){
+                .then(function({enemigos}){    
+                    mokeponesEnemigos = enemigos.map(function(enemigo) {
+
                         let mokeponEnemigo = null
                         const mokeponNombre = enemigo.mokepon.nombre || ""
 
@@ -339,10 +335,10 @@ function enviarPosicion(x,y) {
                         }else{
                             mokeponEnemigo = new Mokepon('Pydos','./img/Fizz_1.jpg', 5, './img/Fizz_1.jpg')
                         }
-                        mokeponEnemigo.x = enemigo.x
-                        mokeponEnemigo.y = enemigo.y
+                        mokeponEnemigo.x = enemigo.x || 0
+                        mokeponEnemigo.y = enemigo.y || 0
 
-                        mokeponEnemigo.pintarMokepon()
+                        return mokeponEnemigo
                     })
                 })
         }
@@ -380,13 +376,7 @@ function activacionTecla(event) {
     }
 }
 
-function detener(){
-    mascotaJugadorObjeto.velocidadX = 0
-    mascotaJugadorObjeto.velocidadY = 0
-}
-
 function revisarColision(enemigo) {
-
     const arribaEnemigo = enemigo.y
     const abajoEnemigo = enemigo.y + enemigo.alto
     const derechaEnemigo = enemigo.x + enemigo.ancho
@@ -394,30 +384,36 @@ function revisarColision(enemigo) {
 
     const arribaMascota = 
         mascotaJugadorObjeto.y
-    const abajoMascota =
+    const abajoMascota = 
         mascotaJugadorObjeto.y + mascotaJugadorObjeto.alto
-    const derechaMascota =
+    const derechaMascota = 
         mascotaJugadorObjeto.x + mascotaJugadorObjeto.ancho
     const izquierdaMascota = 
         mascotaJugadorObjeto.x
 
-    if (
+    if(
         abajoMascota < arribaEnemigo ||
         arribaMascota > abajoEnemigo ||
         derechaMascota < izquierdaEnemigo ||
         izquierdaMascota > derechaEnemigo
-        ){
-            return;
+    ) {
+        return
     }
 
     detener()
+    clearInterval(intervalo)
     console.log("Se detecto una colision");
-    sectionVerMapa.style.display = 'none'
-    mapa.style.display = 'none'
+
     seccionSeleccionarAtaque.style.display = 'flex'
-    
+    sectionVerMapa.style.display = 'none'
     seleccionarMascotaEnemigo(enemigo)
 }
+
+function detener(){
+    mascotaJugadorObjeto.velocidadX = 0
+    mascotaJugadorObjeto.velocidadY = 0
+}
+
 
 function extraerAtaques(mascotaJugador){
     let ataques
@@ -484,7 +480,21 @@ function secuenciaAtaque(){
                 boton.style.background = '#112f58'
                 boton.disabled = true
             }
-            seleccionAtaqueEnemigo()
+            if(ataqueJugador.length === 5){
+                enviarAtaques()
+            }
+        })
+    })
+}
+
+function enviarAtaques() {
+    fetch(`/mokepon/${jugadorId}/ataques`,{
+        method: "post",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body : JSON.stringify({
+            ataques : ataqueJugador
         })
     })
 }
