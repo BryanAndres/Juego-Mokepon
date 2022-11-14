@@ -224,3 +224,7 @@ input:checked + label {
 #mapa{
     margin-top: 20px;    
 }
+
+.boton-movimiento{
+    user-select: none;
+}

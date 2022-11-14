@@ -26,10 +26,36 @@
     <section id="ver-mapa">
         <h1 class="titulo">Recorre el mapa con tu Mokepon</h1>
         <canvas id="mapa"></canvas>
-        <button onmouseup="detener()"  onmousedown="moverArriba()">Arriba</button>
-        <button onmouseup="detener()"  onmousedown="moverIzquierda()">Izquierda</button>
-        <button onmouseup="detener()"  onmousedown="moverAbajo()">Abajo</button>
-        <button onmouseup="detener()"  onmousedown="moverDerecha()">Derecha</button>
+        <button class="boton-movimiento"
+            ontouchend="detener()"
+            onmouseup="detener()"
+                ontouchstart="moverArriba()"
+            onmousedown="moverArriba()">
+        Arributton>
+
+        <button class="boton-movimiento"
+            ontouchend="detener()" 
+            onmouseup ="detener()"
+
+            ontouchstart="mover"
+            onmousedown="moverIzquierda()">
+        Izquierda</button>
+
+        <button class="boton-movimiento"
+            ontouchend="detener()" 
+            onmouseup ="detener()"
+
+            ontouchstart="moverAbajo()"
+            onmousedown="moverAbajo()">
+        Abajo</button>
+
+        <button class="boton-movimiento"
+            ontouchend="detener()" 
+            onmouseup ="detener()"
+
+            ontouchstart="moverDerecha()"
+            onmousedown="moverDerecha()">
+        Derecha</button>
     </section>
 
     <section id="seleccionar-ataque">       
